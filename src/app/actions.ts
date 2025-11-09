@@ -1,6 +1,5 @@
 "use server";
 import { ai } from "@/ai/genkit";
-import { generate } from "genkit/ai";
 import { z } from "zod";
 import { fileSystem } from "@/lib/file-system";
 
@@ -18,7 +17,7 @@ export async function searchFilesAi(
 ): Promise<string[]> {
   const allFiles = fileSystem.getAllFilePaths();
   try {
-    const result = await generate({
+    const result = await ai.generate({
       model: ai.model,
       prompt: `
         You are a file search assistant. Given a list of file paths, find all paths that are a fuzzy, partial, or semantic match for the user's search query within the current directory and its subdirectories.
